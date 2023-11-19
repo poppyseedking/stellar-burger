@@ -1,22 +1,7 @@
 import BurgerIngredient from "../burger-ingredient/burger-ingredient";
 import styles from "./burger-ingredients-group.module.css";
 import PropTypes from "prop-types";
-
-const burgerIngredientPropTypes = PropTypes.shape({
-  _id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  proteins: PropTypes.number,
-  fat: PropTypes.number,
-  carbohydrates: PropTypes.number,
-  calories: PropTypes.number,
-  price: PropTypes.number.isRequired,
-  image: PropTypes.string,
-  image_mobile: PropTypes.string,
-  image_large: PropTypes.string,
-  __v: PropTypes.number,
-  count: PropTypes.number,
-});
+import { burgerIngredientPropTypes } from "../../utils/types.js";
 
 function BurgerIngredientsGroup(props) {
   return (
@@ -36,7 +21,10 @@ function BurgerIngredientsGroup(props) {
 }
 
 BurgerIngredientsGroup.propTypes = {
-  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes),
+  ingredientsData: PropTypes.arrayOf({
+    ...burgerIngredientPropTypes,
+    count: PropTypes.number,
+  }),
 };
 
 export default BurgerIngredientsGroup;
