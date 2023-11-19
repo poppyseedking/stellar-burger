@@ -1,0 +1,44 @@
+:root {
+  --max-container-width: 1296px
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.main {
+  width: 100%;
+  max-width: var(--max-container-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: calc(var(--offset-base-size) * 14);
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}

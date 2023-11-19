@@ -1,0 +1,7 @@
+.counter_wrap {
+    display: none;
+    position: relative;
+}
+.counter_wrap.visible {
+    display: block;
+}
