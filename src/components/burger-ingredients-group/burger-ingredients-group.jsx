@@ -21,10 +21,7 @@ function BurgerIngredientsGroup(props) {
 }
 
 BurgerIngredientsGroup.propTypes = {
-  ingredientsData: PropTypes.arrayOf({
-    ...burgerIngredientPropTypes,
-    count: PropTypes.number,
-  }),
+  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes),
 };
 
 export default BurgerIngredientsGroup;

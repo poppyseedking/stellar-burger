@@ -1,20 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 
-class TabContent extends React.Component {
-  elem = React.createRef();
+const TabContent = function TabContent({ active, children }) {
+  const elem = React.createRef();
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps.active) {
-      this.elem.current.scrollIntoView({ behavior: "smooth" });
+  React.useEffect(() => {
+    if (active === true) {
+      elem.current.scrollIntoView({ behavior: "smooth" });
     }
-    return false;
-  }
+  }, [active, elem]);
 
-  render() {
-    return <div ref={this.elem}>{this.props.children}</div>;
-  }
-}
+  return <div ref={elem}>{children}</div>;
+};
 
 TabContent.propTypes = {
   active: PropTypes.bool,
