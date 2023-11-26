@@ -8,19 +8,13 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import styles from "./burger-ingredient.module.css";
 import PropTypes from "prop-types";
 import { burgerIngredientPropTypes } from "../../utils/types.js";
+import { useModal } from "../../hooks/use-modal";
 
 function BurgerIngredient(props) {
-  const [modalVisible, setModalVisible] = React.useState(false);
-
-  const handleOpenModal = () => {
-    setModalVisible(true);
-  };
-  const handleCloseModal = () => {
-    setModalVisible(false);
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const modal = (
-    <Modal title={"Детали ингредиента"} onClose={handleCloseModal}>
+    <Modal title={"Детали ингредиента"} onClose={closeModal}>
       <IngredientDetails ingredient={props.ingredient} />
     </Modal>
   );
@@ -28,7 +22,7 @@ function BurgerIngredient(props) {
   return (
     <>
       <div
-        onClick={handleOpenModal}
+        onClick={openModal}
         className="text-center mt-4 mb-4 ml-3 mr-3 cursor-pointer"
       >
         <div
@@ -45,7 +39,7 @@ function BurgerIngredient(props) {
         </div>
         <p className="text text_type_main-default">{props.ingredient.name}</p>
       </div>
-      {modalVisible && modal}
+      {isModalOpen && modal}
     </>
   );
 }

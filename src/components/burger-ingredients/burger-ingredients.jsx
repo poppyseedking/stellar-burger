@@ -90,7 +90,7 @@ function BurgerIngredients(props) {
 
 BurgerIngredients.propTypes = {
   selectedIngredients: PropTypes.arrayOf(PropTypes.string),
-  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes),
+  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes).isRequired,
   dataLoadingStatus: dataLoadingStatusPropType,
 };
 

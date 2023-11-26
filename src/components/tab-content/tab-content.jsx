@@ -15,6 +15,10 @@ const TabContent = function TabContent({ active, children }) {
 
 TabContent.propTypes = {
   active: PropTypes.bool,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };
 
 export default TabContent;

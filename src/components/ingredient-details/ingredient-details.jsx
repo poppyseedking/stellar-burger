@@ -7,7 +7,7 @@ const IngredientDetails = ({ ingredient }) => {
       <img
         className={styles.img}
         src={ingredient.image_large}
-        alt="Биокотлета из марсианской Магнолии"
+        alt={ingredient.name}
       />
       <p className="mt-4 mb-8 text text_type_main-medium">{ingredient.name}</p>
       <div className="text text_type_main-default text_color_inactive d-flex justify-content-between pb-5">

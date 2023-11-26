@@ -84,8 +84,8 @@ function BurgerConstructor(props) {
 }
 
 BurgerConstructor.propTypes = {
-  selectedIngredients: PropTypes.arrayOf(PropTypes.string),
-  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes),
+  selectedIngredients: PropTypes.arrayOf(PropTypes.string).isRequired,
+  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes).isRequired,
   dataLoadingStatus: dataLoadingStatusPropType,
 };
 

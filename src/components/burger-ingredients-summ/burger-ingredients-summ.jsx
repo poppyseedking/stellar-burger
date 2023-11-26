@@ -8,27 +8,19 @@ import OrderDetails from "../order-details/order-details";
 import styles from "./burger-ingredients-summ.module.css";
 import PropTypes from "prop-types";
 import { dataLoadingStatusPropType } from "../../utils/types";
+import { useModal } from "../../hooks/use-modal";
 
 function BurgerIngredientsSumm(props) {
-  const [modalVisible, setModalVisible] = React.useState(false);
-  const [order, setOrder] = React.useState();
-
-  const handleOpenModal = () => {
-    createNewOrder();
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
+  const [order, setOrder] = React.useState({});
 
   const createNewOrder = () => {
     setOrder({ id: Math.floor(Math.random() * (99999 - 1000)) + 1000 });
-
-    setModalVisible(true);
-  };
-
-  const handleCloseModal = () => {
-    setModalVisible(false);
+    openModal();
   };
 
   const modal = (
-    <Modal onClose={handleCloseModal}>
+    <Modal onClose={closeModal}>
       <OrderDetails order={order} />
     </Modal>
   );
@@ -47,18 +39,18 @@ function BurgerIngredientsSumm(props) {
           type="primary"
           size="large"
           extraClass="ml-10"
-          onClick={handleOpenModal}
+          onClick={createNewOrder}
         >
           Оформить заказ
         </Button>
       )}
-      {modalVisible && modal}
+      {isModalOpen && modal}
     </div>
   );
 }
 
 BurgerIngredientsSumm.propTypes = {
-  summ: PropTypes.number,
+  summ: PropTypes.number.isRequired,
   dataLoadingStatus: dataLoadingStatusPropType,
 };
 

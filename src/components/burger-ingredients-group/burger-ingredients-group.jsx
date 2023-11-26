@@ -21,7 +21,8 @@ function BurgerIngredientsGroup(props) {
 }
 
 BurgerIngredientsGroup.propTypes = {
-  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes),
+  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes).isRequired,
+  children: PropTypes.string,
 };
 
 export default BurgerIngredientsGroup;

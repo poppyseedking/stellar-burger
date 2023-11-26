@@ -45,22 +45,23 @@ function App() {
   };
 
   React.useEffect(() => {
-    const getIngredientsData = async () => {
-      try {
-        let response = await fetch(url + "/api/ingredients");
-        if (response.status === 200) {
-          let data = await response.json();
-          setIngredientsData(data.data);
-          generateRandomSelectedIngredients(data.data);
-          setDataLoadingStatus("loaded");
+    fetch(url + "/api/ingredients")
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
         } else {
-          setDataLoadingStatus("error");
+          throw new Error("Ошибка при получении списка ингредиентов");
         }
-      } catch (error) {
+      })
+      .then((data) => {
+        setIngredientsData(data.data);
+        generateRandomSelectedIngredients(data.data);
+        setDataLoadingStatus("loaded");
+      })
+      .catch((error) => {
+        console.log(error);
         setDataLoadingStatus("error");
-      }
-    };
-    getIngredientsData();
+      });
   }, []);
 
   return (

@@ -21,6 +21,10 @@ const ModalOverlay = (props) => {
 
 ModalOverlay.propTypes = {
   onClose: PropTypes.func,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 };
 
 export default ModalOverlay;
