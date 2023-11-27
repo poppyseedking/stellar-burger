@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./app-header.module.css";
 
-function AppHeader(props) {
+function AppHeader() {
   return (
     <header className={styles.header}>
       <nav className={`${styles.nav} pt-4 pb-4`}>

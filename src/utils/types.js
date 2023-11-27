@@ -13,14 +13,14 @@ export const burgerIngredientPropTypes = PropTypes.shape({
   image_mobile: PropTypes.string,
   image_large: PropTypes.string,
   __v: PropTypes.number,
-});
+}).isRequired;
 
 export const dataLoadingStatusPropType = PropTypes.oneOf([
   "loaded",
   "error",
   "loading",
-]);
+]).isRequired;
 
 export const orderPropType = PropTypes.shape({
   id: PropTypes.number,
-});
+}).isRequired;
