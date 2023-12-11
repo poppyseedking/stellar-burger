@@ -46,3 +46,69 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+.burger-drop-active .constructor-element {}
+
+.burger-can_drop .constructor-element {
+  -webkit-animation: fadeInFromNone 1s infinite;
+  -moz-animation: fadeInFromNone 1s infinite;
+  -o-animation: fadeInFromNone 1s infinite;
+  animation: fadeInFromNone 1s infinite;
+  transition: 0.2s;
+}
+
+@-webkit-keyframes fadeInFromNone {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@-moz-keyframes fadeInFromNone {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@-o-keyframes fadeInFromNone {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}
+
+@keyframes fadeInFromNone {
+  0% {
+    opacity: 0.2;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.2;
+  }
+}

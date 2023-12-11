@@ -1,7 +1,9 @@
-import { burgerIngredientPropTypes } from "../../utils/types.js";
+import { useSelector } from "react-redux";
 import styles from "./ingredient-details.module.css";
 
-const IngredientDetails = ({ ingredient }) => {
+const IngredientDetails = () => {
+  const ingredient = useSelector((store) => store.currentIngredient.ingredient);
+
   return (
     <div className="text-center">
       <img
@@ -38,10 +40,6 @@ const IngredientDetails = ({ ingredient }) => {
       </div>
     </div>
   );
-};
-
-IngredientDetails.propTypes = {
-  ingredient: burgerIngredientPropTypes,
 };
 
 export default IngredientDetails;

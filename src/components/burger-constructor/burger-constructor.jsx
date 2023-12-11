@@ -1,93 +1,109 @@
-import {
-  ConstructorElement,
-  DragIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
+import { sort as sortIngredients } from "../../services/selected-ingredients";
 import BurgerIngredientsSumm from "../burger-ingredients-summ/burger-ingredients-summ";
+import BurgerConstructorIngredient from "../burger-constructor-ingredient/burger-constructor-ingredient";
+import BugerDropBunArea from "../burger-drop-bun-area/burger-drop-bun-area";
+import BugerDropIngredientArea from "../burger-drop-ingredient-area/burger-drop-ingredient-area";
 import styles from "./burger-constructor.module.css";
-import burgerBunImg from "../../images/bun.png";
-import PropTypes from "prop-types";
-import {
-  burgerIngredientPropTypes,
-  dataLoadingStatusPropType,
-} from "../../utils/types.js";
 
-function BurgerConstructor(props) {
+function BurgerConstructor() {
+  const dispatch = useDispatch();
+
+  const selectedIngredients = useSelector(
+    (store) => store.selectedIngredients.ingredients
+  );
+  const selectedBun = useSelector((store) => store.selectedIngredients.bun);
+
+  const moveCard = useCallback(
+    (fromIndex, toIndex) => {
+      const ingredients = [...selectedIngredients];
+      ingredients.splice(toIndex, 0, ingredients.splice(fromIndex, 1)[0]);
+      dispatch(sortIngredients(ingredients));
+    },
+    [selectedIngredients, dispatch]
+  );
+
   return (
     <section className={`${styles.main_section} pt-25 pb-10`}>
-      {props.dataLoadingStatus === "loaded" && (
+      <BugerDropBunArea>
         <div className={`${styles.element_container} ml-8 mr-4 `}>
-          <ConstructorElement
-            type="top"
-            isLocked={true}
-            text="Краторная булка N-200i (верх)"
-            price={1255}
-            thumbnail={burgerBunImg}
-          />
+          {selectedBun ? (
+            <ConstructorElement
+              type="top"
+              isLocked={true}
+              text={selectedBun.name}
+              price={selectedBun.price}
+              thumbnail={selectedBun.image_mobile}
+            />
+          ) : (
+            <div className="constructor-element constructor-element_pos_top">
+              <span className="d-flex align-items-center justify-content-center pt-3">
+                Перетащите понравившуюся булку
+              </span>
+            </div>
+          )}
         </div>
-      )}
-      {props.dataLoadingStatus === "loaded" && (
-        <div
-          className={`${styles.selected_ingredients} custom-scroll mt-4 mb-4 pr-2`}
-        >
-          {props.selectedIngredients.map((item_id, index) => {
-            let item = props.ingredientsData.find(
-              (item) => item._id === item_id && item.type !== "bun"
+      </BugerDropBunArea>
+
+      <BugerDropIngredientArea>
+        {selectedIngredients.length !== 0 ? (
+          selectedIngredients.map((item, index) => {
+            return (
+              <BurgerConstructorIngredient
+                item={item}
+                key={item.id}
+                id={item.id}
+                index={index}
+                moveCard={moveCard}
+              />
             );
-            if (item)
-              return (
-                <div className={styles.element_container} key={index}>
-                  <DragIcon type="primary" />
-                  <ConstructorElement
-                    key={item._id}
-                    text={item.name}
-                    price={item.price}
-                    thumbnail={item.image_mobile}
-                    extraClass="ml-2"
-                  />
-                </div>
-              );
-          })}
-        </div>
-      )}
-      {props.dataLoadingStatus === "loaded" && (
+          })
+        ) : (
+          <div className="constructor-element ml-8">
+            <span className="d-flex align-items-center justify-content-center pt-3">
+              Перетащите начинки и соусы
+            </span>
+          </div>
+        )}
+      </BugerDropIngredientArea>
+
+      <BugerDropBunArea>
         <div className={`${styles.element_container} ml-8 mr-4 `}>
-          <ConstructorElement
-            type="bottom"
-            isLocked={true}
-            text="Краторная булка N-200i (низ)"
-            price={1255}
-            thumbnail={burgerBunImg}
-          />
+          {selectedBun ? (
+            <ConstructorElement
+              type="bottom"
+              isLocked={true}
+              text={selectedBun.name}
+              price={selectedBun.price}
+              thumbnail={selectedBun.image_mobile}
+            />
+          ) : (
+            <div className="constructor-element constructor-element_pos_bottom">
+              <span className="d-flex align-items-center justify-content-center pt-3">
+                Перетащите понравившуюся булку
+              </span>
+            </div>
+          )}
         </div>
-      )}
+      </BugerDropBunArea>
+
       <BurgerIngredientsSumm
-        dataLoadingStatus={props.dataLoadingStatus}
         summ={
-          props.selectedIngredients.length > 0
-            ? props.selectedIngredients
-                .map((item_id) =>
-                  props.ingredientsData.find((item) => item._id === item_id)
-                )
-                .reduce(
-                  (prev, current) =>
-                    prev +
-                    (current && current.price !== undefined
-                      ? current.price
-                      : 0),
-                  0
-                )
-            : 0
+          (selectedBun ? selectedBun.price * 2 : 0) +
+          (selectedIngredients.length > 0
+            ? selectedIngredients.reduce(
+                (prev, current) =>
+                  prev +
+                  (current && current.price !== undefined ? current.price : 0),
+                0
+              )
+            : 0)
         }
       />
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  selectedIngredients: PropTypes.arrayOf(PropTypes.string.isRequired)
-    .isRequired,
-  ingredientsData: PropTypes.arrayOf(burgerIngredientPropTypes).isRequired,
-  dataLoadingStatus: dataLoadingStatusPropType,
-};
 
 export default BurgerConstructor;
