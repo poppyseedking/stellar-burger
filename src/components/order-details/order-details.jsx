@@ -1,6 +1,7 @@
 import styles from "./order-details.module.css";
 import imageDone from "../../images/done.png";
 import { useSelector } from "react-redux";
+import imageLoader from "../../images/infinity.svg";
 
 const OrderDetails = () => {
   const order = useSelector((store) => store.order.order);
@@ -9,13 +10,16 @@ const OrderDetails = () => {
     return ("000000" + num).slice(-len);
   };
 
-  const formattedOrderId = order ? addZeros(order.number) : "...";
+  const loader = (
+    <img className={`${styles.loader}`} src={imageLoader} alt="Done" />
+  );
 
   return (
     <div className="text-center pb-20 pt-10">
-      <p className="text text_type_digits-large pb-8">{formattedOrderId}</p>
-      {order && (
+      {order ? (
         <>
+          <p className="text text_type_digits-large pb-8">{addZeros(order.number)}</p>
+
           <p className="text text_type_main-medium pb-15">
             идентификатор заказа
           </p>
@@ -27,6 +31,8 @@ const OrderDetails = () => {
             Дождитесь готовности на орбитальной станции
           </p>
         </>
+      ) : (
+        loader
       )}
     </div>
   );

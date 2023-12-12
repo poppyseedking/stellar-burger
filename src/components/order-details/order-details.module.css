@@ -1,3 +1,9 @@
 .done {
-	height: 120px;
+  height: 120px;
+}
+
+.loader {
+  max-height: 300px;
+  -webkit-filter: drop-shadow(3px 3px 2px rgba(241, 3, 230, 0.432));
+  filter: drop-shadow(2px 2px 5px rgba(241, 3, 229, 0.432));
 }

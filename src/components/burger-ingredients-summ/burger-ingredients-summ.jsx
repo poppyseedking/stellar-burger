@@ -22,8 +22,6 @@ function BurgerIngredientsSumm({ summ }) {
   );
   const selectedBun = useSelector((store) => store.selectedIngredients.bun);
 
-  const order = useSelector((store) => store.order.order);
-
   const createNewOrder = () => {
     const orderIngredients = [
       selectedBun._id,
@@ -63,7 +61,7 @@ function BurgerIngredientsSumm({ summ }) {
           Оформить заказ
         </Button>
       )}
-      {order && modal}
+      {isModalOpen && modal}
     </div>
   );
 }

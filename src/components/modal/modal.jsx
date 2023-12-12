@@ -12,8 +12,10 @@ const Modal = (props) => {
     props.onClose();
   };
 
-  const closeByKeyEsc = () => {
-    props.onClose();
+  const closeByKeyEsc = (e) => {
+    if (e.keyCode === 27) {
+      props.onClose();
+    }
   };
 
   React.useEffect(() => {
