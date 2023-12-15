@@ -13,7 +13,7 @@ const Modal = (props) => {
   };
 
   const closeByKeyEsc = (e) => {
-    if (e.keyCode === 27) {
+    if (e.key === "Escape") {
       props.onClose();
     }
   };
@@ -24,7 +24,7 @@ const Modal = (props) => {
     return () => {
       document.removeEventListener("keydown", closeByKeyEsc, false);
     };
-  }, []);
+  });
 
   return ReactDOM.createPortal(
     <ModalOverlay onClose={props.onClose}>
