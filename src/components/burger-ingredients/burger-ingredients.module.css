@@ -1,0 +1,19 @@
+.main_section {
+  max-height: calc(100vh - var(--offset-base-size) * 22);
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+}
+
+.scrollable {
+  overflow: auto;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  border: 0px;
+  border-radius: 0px;
+}
