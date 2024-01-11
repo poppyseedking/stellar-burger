@@ -1,3 +1,4 @@
+import React from "react";
 import {
   CurrencyIcon,
   Button,
@@ -11,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { createOrder } from "../../services/actions/order";
 import { clear as clearOrder } from "../../services/order";
 import { clear as clearSelectedIngredients } from "../../services/selected-ingredients";
+import { Navigate } from "react-router-dom";
 
 function BurgerIngredientsSumm({ summ }) {
   const dispatch = useDispatch();
@@ -22,15 +24,29 @@ function BurgerIngredientsSumm({ summ }) {
   );
   const selectedBun = useSelector((store) => store.selectedIngredients.bun);
 
+  const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
+  const user = useSelector((store) => store.user.user);
+
+  const [needAuth, setNeedAuth] = React.useState(false);
+
   const createNewOrder = () => {
     const orderIngredients = [
       selectedBun._id,
       ...selectedIngredients.map((item) => item._id),
       selectedBun._id,
     ];
-    dispatch(createOrder(orderIngredients));
-    openModal();
+
+    if (!isAuthChecked || !user) {
+      setNeedAuth(true);
+    } else {
+      dispatch(createOrder(orderIngredients));
+      openModal();
+    }
   };
+
+  if (needAuth) {
+    return <Navigate to="/login" replace={true} />;
+  }
 
   const modal = (
     <Modal

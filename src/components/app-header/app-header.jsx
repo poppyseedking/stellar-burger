@@ -4,6 +4,7 @@ import {
   ListIcon,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, NavLink } from "react-router-dom";
 import styles from "./app-header.module.css";
 
 function AppHeader() {
@@ -12,36 +13,54 @@ function AppHeader() {
       <nav className={`${styles.nav} pt-4 pb-4`}>
         <ul>
           <li>
-            <a
-              href="/"
-              className={`${styles.link} ${styles.active} text text_type_main-default pt-4 pb-4 pl-5 pr-5 mr-2`}
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                [
+                  styles.link,
+                  isActive ? styles.active : "",
+                  "text text_type_main-default pt-4 pb-4 pl-5 pr-5 mr-2",
+                ].join(" ")
+              }
             >
               <BurgerIcon />
               Конструктор
-            </a>
+            </NavLink>
           </li>
           <li>
-            <a
-              href="/"
-              className={`${styles.link} text text_type_main-default pt-4 pb-4 pl-5 pr-5`}
+            <NavLink
+              to="/orders"
+              className={({ isActive }) =>
+                [
+                  styles.link,
+                  isActive ? styles.active : "",
+                  "text text_type_main-default pt-4 pb-4 pl-5 pr-5",
+                ].join(" ")
+              }
             >
               <ListIcon />
               Лента заказов
-            </a>
+            </NavLink>
           </li>
         </ul>
-        <a href="/">
+        <Link to="/">
           <Logo />
-        </a>
+        </Link>
         <ul className="justify-content-end">
           <li>
-            <a
-              href="/"
-              className={`${styles.link} text text_type_main-default pt-4 pb-4 pl-5 pr-5`}
+            <NavLink
+              to="/profile"
+              className={({ isActive }) =>
+                [
+                  styles.link,
+                  isActive ? styles.active : "",
+                  "text text_type_main-default pt-4 pb-4 pl-5 pr-5",
+                ].join(" ")
+              }
             >
               <ProfileIcon type="secondary" />
               Личный кабинет
-            </a>
+            </NavLink>
           </li>
         </ul>
       </nav>

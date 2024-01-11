@@ -7,6 +7,7 @@ import "@ya.praktikum/react-developer-burger-ui-components";
 
 import { Provider } from "react-redux";
 import { configureStore } from "./services/store";
+import { BrowserRouter as Router } from "react-router-dom";
 
 const store = configureStore();
 
@@ -15,9 +16,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <Router>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </Router>
   </React.StrictMode>
 );
 
