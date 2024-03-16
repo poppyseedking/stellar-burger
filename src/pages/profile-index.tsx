@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, FormEvent, useEffect } from "react";
 import {
   EmailInput,
   PasswordInput,
@@ -78,7 +78,7 @@ function ProfileIndex({ title }: { title: string }) {
     }
   };
 
-  const onSave = (e: ChangeEvent<HTMLFormElement>) => {
+  const onSave = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
       userUpdate({

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent, FormEventHandler } from "react";
 import AppHeader from "../components/app-header/app-header";
 import {
   EmailInput,
@@ -24,7 +24,7 @@ function Login() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const onLogin = (e: ChangeEvent<HTMLFormElement>) => {
+  const onLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
       loginAction({

@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import AppHeader from "../components/app-header/app-header";
 import {
   EmailInput,
@@ -15,7 +15,7 @@ function ForgotPassword() {
 
   const [isForgotSend, setIsForgotSend] = React.useState(false);
 
-  const onForgotPass = (e: ChangeEvent<HTMLFormElement>) => {
+  const onForgotPass = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     api
       .forgotPassword({

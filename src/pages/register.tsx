@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import AppHeader from "../components/app-header/app-header";
 import {
   Input,
@@ -30,7 +30,7 @@ function Register() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const onRegister = (e: ChangeEvent<HTMLFormElement>) => {
+  const onRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
       registerAction({

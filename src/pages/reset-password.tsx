@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, FormEvent } from "react";
 import AppHeader from "../components/app-header/app-header";
 import {
   Input,
@@ -21,7 +21,7 @@ function ResetPassword() {
 
   const [isResetSend, setIsResetSend] = React.useState(false);
 
-  const onResetPass = (e: ChangeEvent<HTMLFormElement>) => {
+  const onResetPass = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     api
       .resetPassword({
