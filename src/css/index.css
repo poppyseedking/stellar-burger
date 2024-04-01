@@ -15,6 +15,12 @@
   grid-column-gap: calc(var(--offset-base-size) * 14);
 }
 
+.container {
+  width: 100%;
+  max-width: var(--max-container-width);
+  margin: 0 auto;
+}
+
 .main-page {
   width: 100%;
   max-width: var(--max-container-width);
@@ -69,6 +75,30 @@
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.clear-link-styles {
+  text-decoration: none;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.profile-orders-block {
+  overflow: auto;
+  max-height: calc(100vh - var(--offset-base-size) * 60);
+  min-height: 540px;
+  padding-right: 8px;
+}
+
+.profile-orders-block::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+.profile-orders-block::-webkit-scrollbar-thumb {
+  border: 0px !important;
+  border-radius: 0px !important;
 }
 
 .burger-drop-active .constructor-element {}

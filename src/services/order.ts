@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const orderSlice = createSlice({
   name: "order",
   initialState: {
-    order: null,
+    order: null as { number: number } | null,
     loading: false,
     error: null,
   },

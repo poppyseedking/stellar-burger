@@ -14,6 +14,7 @@ import {
   ResetPassword,
   Ingredient,
   Profile,
+  OrderDetailsPage,
 } from "../../pages";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
@@ -25,6 +26,8 @@ import { checkUserAuth } from "../../services/actions/user";
 import ProfileIndex from "../../pages/profile-index";
 import ProfileOrders from "../../pages/profile-orders";
 import { AppDispatch } from "../../services/store";
+import Feed from "../../pages/feed";
+import OrderDetail from "../order-detail/order-detail";
 
 function App() {
   const location = useLocation();
@@ -86,6 +89,12 @@ function App() {
           />
         </Route>
         <Route path="/ingredients/:id" element={<Ingredient />} />
+        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed/:number" element={<OrderDetailsPage />} />
+        <Route
+          path="/profile/orders/:number"
+          element={<OnlyAuth component={<OrderDetailsPage />} />}
+        />
         <Route path="*" element={<Page404 />} />
       </Routes>
 
@@ -97,6 +106,26 @@ function App() {
               <Modal title={"Детали ингредиента"} onClose={handleModalClose}>
                 <IngredientDetails ingredientData={null} />
               </Modal>
+            }
+          />
+          <Route
+            path="/feed/:number"
+            element={
+              <Modal title={"Детали заказа"} adjustToOrderDetail={true} onClose={handleModalClose}>
+                <OrderDetail />
+              </Modal>
+            }
+          />
+          <Route
+            path="/profile/orders/:number"
+            element={
+              <OnlyAuth
+                component={
+                  <Modal title={"Детали заказа"} adjustToOrderDetail={true} onClose={handleModalClose}>
+                    <OrderDetail />
+                  </Modal>
+                }
+              />
             }
           />
         </Routes>

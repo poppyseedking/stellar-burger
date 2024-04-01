@@ -6,6 +6,7 @@ import { ForgotPassword } from "./forgot-password";
 import { ResetPassword } from "./reset-password";
 import { Ingredient } from "./ingredient";
 import { Profile } from "./profile";
+import { OrderDetailsPage } from "./order-details-page";
 
 export {
   Home,
@@ -16,4 +17,5 @@ export {
   ResetPassword,
   Ingredient,
   Profile,
+  OrderDetailsPage,
 };

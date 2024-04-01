@@ -1,5 +1,4 @@
 import React, { MouseEvent } from "react";
-import PropTypes from "prop-types";
 
 import styles from "./modal-overlay.module.css";
 
@@ -22,14 +21,6 @@ const ModalOverlay = (props: TModalOverlayProps) => {
       {props.children}
     </div>
   );
-};
-
-ModalOverlay.propTypes = {
-  onClose: PropTypes.func,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
 };
 
 export default ModalOverlay;

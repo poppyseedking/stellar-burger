@@ -24,4 +24,29 @@ export const ingredientsApi = createApi({
   }),
 });
 
+export const orderDetailApi = createApi({
+  reducerPath: "orderDetailApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: ingredientsApiConfig.baseUrl,
+  }),
+  endpoints: (builder) => ({
+    getOrder: builder.query({
+      query: (id) => `/api/orders/${id}`,
+      providesTags: (result) => {
+        return result?.orders
+          ? [
+              ...result.orders.map(({ _id }: { _id: string }) => ({
+                type: "OrderDetail",
+                id: _id,
+              })),
+              { type: "OrderDetail", id: "LIST" },
+            ]
+          : [{ type: "OrderDetail", id: "LIST" }];
+      },
+    }),
+  }),
+});
+
+export const { useGetOrderQuery } = orderDetailApi;
+
 export const { useGetIngredientsQuery } = ingredientsApi;

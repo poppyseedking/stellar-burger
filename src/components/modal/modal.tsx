@@ -2,7 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../modal-overlay/modal-overlay";
-import PropTypes from "prop-types";
 import styles from "./modal.module.css";
 
 const modalRoot = document.getElementById("react-modals") as Element;
@@ -11,6 +10,7 @@ type TModalProps = {
   onClose: () => void;
   title?: string;
   children: React.ReactNode | React.ReactNode[];
+  adjustToOrderDetail?: boolean;
 };
 
 const Modal = (props: TModalProps) => {
@@ -36,25 +36,28 @@ const Modal = (props: TModalProps) => {
     <ModalOverlay onClose={props.onClose}>
       <div className={styles.modal}>
         <header className={styles.header}>
-          <h3 className={`text text_type_main-large`}>{props.title}</h3>
+          {!props.adjustToOrderDetail ? (
+            <h3 className={`text text_type_main-large`}>{props.title}</h3>
+          ) : (
+            <span></span>
+          )}
           <span onClick={handelCloseModal} className="cursor-pointer">
             <CloseIcon type="primary" />
           </span>
         </header>
-        <div className={styles.content}>{props.children}</div>
+        <div
+          className={`${
+            props.adjustToOrderDetail
+              ? styles.orderDetailContent
+              : styles.content
+          }`}
+        >
+          {props.children}
+        </div>
       </div>
     </ModalOverlay>,
     modalRoot
   );
-};
-
-Modal.propTypes = {
-  title: PropTypes.string,
-  onClose: PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
 };
 
 export default Modal;

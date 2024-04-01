@@ -1,0 +1,27 @@
+.main_section {
+  max-height: calc(100vh - var(--offset-base-size) * 60);
+  min-height: 540px;
+  padding-right: 8px;
+}
+
+.count {
+  color: #F2F2F3;
+  text-shadow: 3px 3px 0px #3333FF80, 0px 8px 8px #3333FF40, 0px -4px 8px #3333FF40;
+}
+
+
+.scrollable {
+  overflow: auto;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  border: 0px;
+  border-radius: 0px;
+}
+.readyBlock {
+  min-width: 250px;
+}

@@ -65,7 +65,7 @@ function BurgerIngredientsSumm({ summ }: { summ: number }) {
     <Modal
       onClose={() => {
         dispatch(clearOrder());
-        dispatch(clearSelectedIngredients(""));
+        dispatch(clearSelectedIngredients());
         closeModal();
       }}
     >

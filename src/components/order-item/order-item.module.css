@@ -1,0 +1,102 @@
+.item {
+  background: #1C1C21;
+  border-radius: 40px;
+  display: block;
+  text-decoration: none;
+  color: white;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.id {}
+
+.date {}
+
+.name {}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.summ {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredients {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.ingredient {
+  width: 64px;
+  height: 64px;
+  background: #131316;
+
+  border-radius: 100px;
+  border: double 2px transparent;
+  background-image: linear-gradient(#1C1C21, #1C1C21),
+    linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-left: -15px;
+}
+
+.ingredient:nth-child(1) {
+  margin-left: 0px;
+}
+
+.ingredient:nth-child(1) {
+  z-index: 6;
+}
+
+.ingredient:nth-child(2) {
+  z-index: 5;
+}
+
+.ingredient:nth-child(3) {
+  z-index: 4;
+}
+
+.ingredient:nth-child(4) {
+  z-index: 3;
+}
+
+.ingredient:nth-child(5) {
+  z-index: 2;
+}
+
+.ingredient:nth-child(6) {
+  z-index: 1;
+}
+
+.ingredient img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.ingredient span {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: -64px;
+  background: #1c1c2199;
+}

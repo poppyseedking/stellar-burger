@@ -1,22 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IIngredient } from "../utils/types";
 
 const selectedIngredientsSlice = createSlice({
   name: "selected-ingredients",
   initialState: {
-    ingredients: [],
-    bun: null,
+    ingredients: [] as IIngredient[],
+    bun: null as IIngredient | null,
   },
   reducers: {
-    add: (state, action) => {
+    add: (state, action: PayloadAction<IIngredient>) => {
       state.ingredients.push(action.payload);
     },
-    sort: (state, action) => {
+    sort: (state, action: PayloadAction<IIngredient[]>) => {
       state.ingredients = action.payload;
     },
-    addBun: (state, action) => {
+    addBun: (state, action: PayloadAction<IIngredient>) => {
       state.bun = action.payload;
     },
-    deleteIngredient: (state, action) => {
+    deleteIngredient: (state, action: PayloadAction<IIngredient["id"]>) => {
       state.ingredients = state.ingredients.filter(
         (item) => item.id !== action.payload
       );
@@ -26,7 +27,6 @@ const selectedIngredientsSlice = createSlice({
       state.bun = null;
     },
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({}),
 });
 
 export const reducer = selectedIngredientsSlice.reducer;

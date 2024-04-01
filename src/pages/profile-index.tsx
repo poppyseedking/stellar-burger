@@ -8,7 +8,6 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { useOutletContext } from "react-router-dom";
 import { userUpdate } from "../services/actions/user";
-import PropTypes from "prop-types";
 import { AppDispatch } from "../services/store";
 import { Context } from "vm";
 
@@ -149,9 +148,5 @@ function ProfileIndex({ title }: { title: string }) {
     </>
   );
 }
-
-ProfileIndex.propTypes = {
-  title: PropTypes.string.isRequired,
-};
 
 export default ProfileIndex;

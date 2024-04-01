@@ -28,3 +28,6 @@
   max-width: 520px;
   margin: 0 auto;
 }
+.orderDetailContent {
+  margin-top: -28px;
+}

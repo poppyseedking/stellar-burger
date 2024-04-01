@@ -30,3 +30,33 @@ export type TUserAuthData = {
   email: string;
   password: string;
 };
+
+export enum WebsocketStatus {
+  CONNECTING = "CONNECTING...",
+  ONLINE = "ONLINE",
+  OFFLINE = "OFFLINE",
+}
+
+export interface TableRow {
+  id: number;
+  text: string;
+}
+
+export type LastOrderData = {
+  ingredients: string[];
+  _id: string;
+  status: string;
+  name: string;
+  number: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type LastOrdersData = {
+  success: boolean;
+  orders: LastOrderData[];
+  total: number;
+  totalToday: number;
+};
+
+export type LastOrdersActions = LastOrdersData;

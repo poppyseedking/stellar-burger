@@ -7,13 +7,13 @@ import {
 import {
   add as addIngredient,
   addBun,
-} from "../../services/selected-ingredients.js";
+} from "../../services/selected-ingredients";
 import { v4 as uuidv4 } from "uuid";
 
 import styles from "./burger-ingredient.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { AppDispatch } from "../../services/store.js";
-import { IIngredient } from "../../utils/types.js";
+import { AppDispatch } from "../../services/store";
+import { IIngredient } from "../../utils/types";
 
 type TBurgerIngredient = {
   ingredient: IIngredient;
