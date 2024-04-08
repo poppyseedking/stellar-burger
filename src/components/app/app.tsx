@@ -20,14 +20,14 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 import { OnlyAuth, OnlyUnAuth } from "../protected-route-element";
-import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { checkUserAuth } from "../../services/actions/user";
 import ProfileIndex from "../../pages/profile-index";
 import ProfileOrders from "../../pages/profile-orders";
-import { AppDispatch } from "../../services/store";
+import { useDispatch } from "../../services/store";
 import Feed from "../../pages/feed";
 import OrderDetail from "../order-detail/order-detail";
+import AppHeader from "../app-header/app-header";
 
 function App() {
   const location = useLocation();
@@ -45,7 +45,7 @@ function App() {
     navigate(-1);
   };
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(checkUserAuth());
@@ -57,6 +57,7 @@ function App() {
 
   return (
     <>
+      <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<OnlyUnAuth component={<Login />} />} />
@@ -111,7 +112,11 @@ function App() {
           <Route
             path="/feed/:number"
             element={
-              <Modal title={"Детали заказа"} adjustToOrderDetail={true} onClose={handleModalClose}>
+              <Modal
+                title={"Детали заказа"}
+                adjustToOrderDetail={true}
+                onClose={handleModalClose}
+              >
                 <OrderDetail />
               </Modal>
             }
@@ -121,7 +126,11 @@ function App() {
             element={
               <OnlyAuth
                 component={
-                  <Modal title={"Детали заказа"} adjustToOrderDetail={true} onClose={handleModalClose}>
+                  <Modal
+                    title={"Детали заказа"}
+                    adjustToOrderDetail={true}
+                    onClose={handleModalClose}
+                  >
                     <OrderDetail />
                   </Modal>
                 }

@@ -4,25 +4,22 @@ import { orderDetailApi } from "./api";
 import { reducer as selectedIngredientsReducer } from "./selected-ingredients";
 import { reducer as currentIngredientReducer } from "./current-ingredient";
 import { reducer as orderReducer } from "./order";
-import { reducer as lastOrdersReducer } from "./last-orders";
-import { reducer as lastUserOrdersReducer } from "./last-user-orders";
+import { lastOrdersReducer } from "./last-orders";
+import { lastUserOrdersReducer } from "./last-user-orders";
 import userReducer from "./user";
 
-import { socketMiddleware } from "./middleware/socket-middleware";
+import {
+  TMiddlewareActions,
+  socketMidlleware,
+} from "./middleware/socket-middleware";
 
-import { TLastOrdersActions } from "./actions/last-orders";
-import { userSocketMiddleware } from "./middleware/user-socket-middleware";
-import { TLastUserOrdersActions } from "./actions/last-user-orders";
-
-const lastOrdersMiddleware = socketMiddleware(
-  "wss://norma.nomoreparties.space/orders/all"
-);
-
-const lastUserOrdersMiddleware = userSocketMiddleware(
-  `wss://norma.nomoreparties.space/orders?token=${localStorage
-    .getItem("accessToken")
-    ?.substring("Bearer ".length)}`
-);
+import {
+  TypedUseSelectorHook,
+  useDispatch as dispatchHook,
+  useSelector as selectorHook,
+} from "react-redux";
+import { wsActions } from "./actions/last-orders";
+import { userWsActions } from "./actions/last-user-orders";
 
 const configureStore = () => {
   const store = createStore({
@@ -40,8 +37,9 @@ const configureStore = () => {
       return getDefaultMiddleware().concat(
         ingredientsApi.middleware,
         orderDetailApi.middleware,
-        lastOrdersMiddleware,
-        lastUserOrdersMiddleware
+
+        socketMidlleware(wsActions),
+        socketMidlleware(userWsActions)
       );
     },
   });
@@ -50,8 +48,11 @@ const configureStore = () => {
 
 export const store = configureStore();
 
-export type AppActions = TLastOrdersActions | TLastUserOrdersActions;
+export type AppActions = TMiddlewareActions;
 
 export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
+
+export const useDispatch: () => AppDispatch = dispatchHook;
+export const useSelector: TypedUseSelectorHook<RootState> = selectorHook;

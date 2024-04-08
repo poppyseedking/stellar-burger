@@ -1,6 +1,4 @@
-export const ingredientsApiConfig = {
-  baseUrl: "https://norma.nomoreparties.space",
-};
+import { BURGER_API_URL } from "./user-api";
 
 function request(url: string, options: {}) {
   return fetch(url, options).then((res) => {
@@ -12,7 +10,7 @@ function request(url: string, options: {}) {
 }
 
 export const createOrder = (ids: string[]) => {
-  return request(`${ingredientsApiConfig.baseUrl}/api/orders`, {
+  return request(`${BURGER_API_URL}/api/orders`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

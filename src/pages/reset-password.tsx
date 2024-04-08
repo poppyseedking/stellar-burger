@@ -1,5 +1,4 @@
 import React, { ChangeEvent, FormEvent } from "react";
-import AppHeader from "../components/app-header/app-header";
 import {
   Input,
   PasswordInput,
@@ -40,44 +39,41 @@ function ResetPassword() {
   }
 
   return (
-    <>
-      <AppHeader />
-      <main className="main-page p-5">
-        <div className="text-center pt-30">
-          <h1 className="text text_type_main-medium mb-6">
-            Восстановление пароля
-          </h1>
-          <form onSubmit={onResetPass}>
-            <div className="d-flex flex-direction-column align-items-center">
-              <PasswordInput
-                placeholder="Введите новый пароль"
-                onChange={onPasswordChange}
-                value={passwordValue}
-                name={"password"}
-                extraClass="mb-6"
-              />
-              <Input
-                type={"text"}
-                placeholder="Введите код из письма"
-                onChange={onCodeChange}
-                value={codeValue}
-                name={"code"}
-                extraClass="mb-6"
-              />
-            </div>
-            <Button htmlType="submit" type="primary" size="large">
-              Сохранить
-            </Button>
-          </form>
-          <p className="text text_type_main-default text_color_inactive mt-20">
-            Вспомнили пароль?{" "}
-            <Link to="/login" className="link">
-              Войти
-            </Link>
-          </p>
-        </div>
-      </main>
-    </>
+    <main className="main-page p-5">
+      <div className="text-center pt-30">
+        <h1 className="text text_type_main-medium mb-6">
+          Восстановление пароля
+        </h1>
+        <form onSubmit={onResetPass}>
+          <div className="d-flex flex-direction-column align-items-center">
+            <PasswordInput
+              placeholder="Введите новый пароль"
+              onChange={onPasswordChange}
+              value={passwordValue}
+              name={"password"}
+              extraClass="mb-6"
+            />
+            <Input
+              type={"text"}
+              placeholder="Введите код из письма"
+              onChange={onCodeChange}
+              value={codeValue}
+              name={"code"}
+              extraClass="mb-6"
+            />
+          </div>
+          <Button htmlType="submit" type="primary" size="large">
+            Сохранить
+          </Button>
+        </form>
+        <p className="text text_type_main-default text_color_inactive mt-20">
+          Вспомнили пароль?{" "}
+          <Link to="/login" className="link">
+            Войти
+          </Link>
+        </p>
+      </div>
+    </main>
   );
 }
 export { ResetPassword };

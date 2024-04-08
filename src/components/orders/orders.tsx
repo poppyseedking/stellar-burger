@@ -1,13 +1,10 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/store";
 import OrderItem from "../order-item/order-item";
 import styles from "./orders.module.css";
-import { RootState } from "../../services/store";
 import { Link, useLocation } from "react-router-dom";
 
 const Orders = () => {
-  const lastOrders = useSelector(
-    (state: RootState) => state.lastOrders.lastOrders
-  );
+  const lastOrders = useSelector((state) => state.lastOrders.lastOrders);
 
   const location = useLocation();
   return (

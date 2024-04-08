@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../services/store";
 import { Navigate, useLocation } from "react-router-dom";
-import { RootState } from "../services/store";
 
 const ProtectedRouteElement = ({
   onlyUnAuth = false,
@@ -10,10 +9,8 @@ const ProtectedRouteElement = ({
   component: JSX.Element;
 }) => {
   // isAuthChecked это флаг, показывающий что проверка токена произведена
-  const isAuthChecked = useSelector(
-    (store: RootState) => store.user.isAuthChecked
-  );
-  const user = useSelector((store: RootState) => store.user.user);
+  const isAuthChecked = useSelector((store) => store.user.isAuthChecked);
+  const user = useSelector((store) => store.user.user);
   const location = useLocation();
 
   if (!isAuthChecked) {

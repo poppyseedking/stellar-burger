@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ingredientsApiConfig } from "../utils/ingredients-api";
+import { BURGER_API_URL } from "../utils/user-api";
 
 export const ingredientsApi = createApi({
   reducerPath: "ingredientsApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: ingredientsApiConfig.baseUrl,
+    baseUrl: BURGER_API_URL,
   }),
   endpoints: (builder) => ({
     getIngredients: builder.query({
@@ -27,7 +27,7 @@ export const ingredientsApi = createApi({
 export const orderDetailApi = createApi({
   reducerPath: "orderDetailApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: ingredientsApiConfig.baseUrl,
+    baseUrl: BURGER_API_URL,
   }),
   endpoints: (builder) => ({
     getOrder: builder.query({

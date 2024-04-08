@@ -1,6 +1,7 @@
 import { TUserAuthData, TUserUpdateData } from "./types";
 
 export const BURGER_API_URL = "https://norma.nomoreparties.space";
+export const WS_ORDERS_URL = "wss://norma.nomoreparties.space";
 
 const checkReponse = (res: Response) => {
   return res.ok
@@ -46,10 +47,7 @@ export const fetchWithRefresh = async (url: string, options: any) => {
 
 function request(url: string, options: {}) {
   return fetch(url, options).then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Ошибка ${res.status}`);
+    return checkReponse(res);
   });
 }
 

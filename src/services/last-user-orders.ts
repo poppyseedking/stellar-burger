@@ -1,48 +1,44 @@
 import { LastOrdersData, WebsocketStatus } from "../utils/types";
 
-import { createSlice } from "@reduxjs/toolkit";
+import { createReducer } from "@reduxjs/toolkit";
 
 import {
-  wsOpen,
-  wsClose,
-  wsMessage,
-  wsError,
-  wsConnecting,
+  wsConnectionSuccess,
+  wsConnectionClosed,
+  wsGetOrders,
+  wsConnectionError,
+  wsConnectionStart,
 } from "./actions/last-user-orders";
 
-export type LastUserOrdersStore = {
+type TInitialState = {
   status: WebsocketStatus;
-  connectionError: string;
+  connectionError: "";
   lastUserOrders: LastOrdersData | null;
 };
 
-const lastUserOrdersSlice = createSlice({
-  name: "last-orders",
-  initialState: {
-    status: WebsocketStatus.OFFLINE,
-    connectionError: "",
-    lastUserOrders: null as LastOrdersData | null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(wsConnecting, (state) => {
-        state.status = WebsocketStatus.CONNECTING;
-      })
-      .addCase(wsOpen, (state) => {
-        state.status = WebsocketStatus.ONLINE;
-        state.connectionError = "";
-      })
-      .addCase(wsClose, (state) => {
-        state.status = WebsocketStatus.OFFLINE;
-      })
-      .addCase(wsError, (state, action) => {
-        state.connectionError = action.payload;
-      })
-      .addCase(wsMessage, (state, action) => {
-        state.lastUserOrders = action.payload;
-      });
-  },
-});
+export const initialState: TInitialState = {
+  status: WebsocketStatus.OFFLINE,
+  connectionError: "",
+  lastUserOrders: null,
+};
 
-export const reducer = lastUserOrdersSlice.reducer;
+export const lastUserOrdersReducer = createReducer(initialState, (builder) => {
+  builder
+    .addCase(wsConnectionStart, (state) => {
+      state.status = WebsocketStatus.CONNECTING;
+    })
+    .addCase(wsConnectionSuccess, (state) => {
+      state.status = WebsocketStatus.ONLINE;
+      state.connectionError = "";
+    })
+    .addCase(wsConnectionClosed, (state) => {
+      state.status = WebsocketStatus.OFFLINE;
+    })
+    .addCase(wsConnectionError, (state) => {
+      state.status = WebsocketStatus.OFFLINE;
+    })
+    .addCase(wsGetOrders, (state, action) => {
+      state.status = WebsocketStatus.ONLINE;
+      state.lastUserOrders = action.payload;
+    });
+});

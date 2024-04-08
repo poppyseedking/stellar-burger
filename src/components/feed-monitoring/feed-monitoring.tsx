@@ -1,11 +1,8 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/store";
 import styles from "./feed-monitoring.module.css";
-import { RootState } from "../../services/store";
 
 const FeedMonitoring = () => {
-  const lastOrders = useSelector(
-    (state: RootState) => state.lastOrders.lastOrders
-  );
+  const lastOrders = useSelector((state) => state.lastOrders.lastOrders);
 
   return (
     <section

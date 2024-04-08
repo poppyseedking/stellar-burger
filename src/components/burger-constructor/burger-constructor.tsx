@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../services/store";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
 import { sort as sortIngredients } from "../../services/selected-ingredients";
 import BurgerIngredientsSumm from "../burger-ingredients-summ/burger-ingredients-summ";
@@ -7,20 +7,19 @@ import BurgerConstructorIngredient from "../burger-constructor-ingredient/burger
 import BugerDropBunArea from "../burger-drop-bun-area/burger-drop-bun-area";
 import BugerDropIngredientArea from "../burger-drop-ingredient-area/burger-drop-ingredient-area";
 import styles from "./burger-constructor.module.css";
-import { AppDispatch, RootState } from "../../services/store";
 import { IIngredient } from "../../utils/types";
 
 type TBun = IIngredient | null;
 
 function BurgerConstructor() {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const selectedIngredients: IIngredient[] = useSelector(
-    (store: RootState) => store.selectedIngredients.ingredients
+    (store) => store.selectedIngredients.ingredients
   );
 
   const selectedBun: TBun = useSelector(
-    (store: RootState) => store.selectedIngredients.bun
+    (store) => store.selectedIngredients.bun
   );
 
   const moveCard = useCallback(

@@ -1,5 +1,5 @@
 import { useDrag } from "react-dnd";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/store";
 import {
   Counter,
   CurrencyIcon,
@@ -12,7 +12,6 @@ import { v4 as uuidv4 } from "uuid";
 
 import styles from "./burger-ingredient.module.css";
 import { Link, useLocation } from "react-router-dom";
-import { AppDispatch } from "../../services/store";
 import { IIngredient } from "../../utils/types";
 
 type TBurgerIngredient = {
@@ -23,7 +22,7 @@ type TBurgerIngredient = {
 type TDropReult = { type: "ingredient" | "bun" };
 
 function BurgerIngredient(props: TBurgerIngredient) {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
   const [{ isDragging }, drag] = useDrag(() => ({
     type: props.ingredient.type,
     item: props.ingredient,

@@ -4,13 +4,10 @@ import { api } from "../../utils/user-api";
 import { AppDispatch } from "../store";
 import { TUserAuthData, TUserUpdateData } from "../../utils/types";
 
-export const getUser = () => {
-  return (dispatch: AppDispatch) => {
-    return api.getUser().then((res) => {
-      dispatch(setUser(res.user));
-    });
-  };
-};
+export const getUser = createAsyncThunk("user/get", async (_, thunkAPI) => {
+  const res = await api.getUser();
+  thunkAPI.dispatch(setUser(res.user));
+});
 
 export const login = createAsyncThunk(
   "user/login",
@@ -32,13 +29,13 @@ export const register = createAsyncThunk(
   }
 );
 
-export const userUpdate = (params: TUserUpdateData) => {
-  return (dispatch: AppDispatch) => {
-    return api.update(params).then((res) => {
-      dispatch(setUser(res.user));
-    });
-  };
-};
+export const userUpdate = createAsyncThunk(
+  "user/update",
+  async (payload: TUserUpdateData, thunkAPI) => {
+    const res = await api.update(payload);
+    thunkAPI.dispatch(setUser(res.user));
+  }
+);
 
 export const checkUserAuth = () => {
   return (dispatch: AppDispatch) => {

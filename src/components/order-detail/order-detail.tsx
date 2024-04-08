@@ -1,6 +1,5 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/store";
 import styles from "./order-detail.module.css";
-import { RootState } from "../../services/store";
 import { useEffect, useState } from "react";
 import { IIngredient, LastOrderData } from "../../utils/types";
 import { useParams } from "react-router-dom";
@@ -8,11 +7,9 @@ import { useGetIngredientsQuery, useGetOrderQuery } from "../../services/api";
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 
 const OrderDetail = () => {
-  const lastOrders = useSelector(
-    (state: RootState) => state.lastOrders.lastOrders
-  );
+  const lastOrders = useSelector((state) => state.lastOrders.lastOrders);
   const lastUserOrders = useSelector(
-    (state: RootState) => state.lastUserOrders.lastUserOrders
+    (state) => state.lastUserOrders.lastUserOrders
   );
 
   const [order, setOrder] = useState<LastOrderData | null>(null);

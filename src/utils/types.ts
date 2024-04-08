@@ -58,5 +58,3 @@ export type LastOrdersData = {
   total: number;
   totalToday: number;
 };
-
-export type LastOrdersActions = LastOrdersData;

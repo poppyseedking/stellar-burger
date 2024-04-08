@@ -3,15 +3,8 @@ import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import BurgerIngredientsGroup from "../burger-ingredients-group/burger-ingredients-group";
 import styles from "./burger-ingredients.module.css";
 import { useGetIngredientsQuery } from "../../services/api";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/store";
 import { IIngredient } from "../../utils/types";
-
-interface TState {
-  selectedIngredients: {
-    ingredients: IIngredient[];
-    bun: IIngredient;
-  };
-}
 
 function BurgerIngredients() {
   const {
@@ -21,11 +14,9 @@ function BurgerIngredients() {
   } = useGetIngredientsQuery("");
 
   const selectedIngredients = useSelector(
-    (state: TState) => state.selectedIngredients.ingredients
+    (state) => state.selectedIngredients.ingredients
   );
-  const selectedBun = useSelector(
-    (state: TState) => state.selectedIngredients.bun
-  );
+  const selectedBun = useSelector((state) => state.selectedIngredients.bun);
 
   const [current, setCurrent] = React.useState(1);
 

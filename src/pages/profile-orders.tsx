@@ -1,16 +1,25 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../services/store";
 import { Link, useLocation, useOutletContext } from "react-router-dom";
-import { AppDispatch, RootState } from "../services/store";
 import OrderItem from "../components/order-item/order-item";
 import { LastOrderData } from "../utils/types";
-import { wsConnecting as wsConnectingUser } from "../services/actions/last-user-orders";
+import { wsConnectionStart } from "../services/actions/last-user-orders";
+import { wsConnectionCloseStart } from "../services/actions/last-orders";
+import { WS_ORDERS_URL } from "../utils/user-api";
 
 function ProfileOrders({ title }: { title: string }) {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
+
+  const userOrdersUrl: string = `${WS_ORDERS_URL}/orders?token=${localStorage
+    .getItem("accessToken")
+    ?.substring("Bearer ".length)}`;
 
   useEffect(() => {
-    dispatch(wsConnectingUser());
+    dispatch(wsConnectionStart(userOrdersUrl));
+
+    return () => {
+      dispatch(wsConnectionCloseStart());
+    };
   }, [dispatch]);
 
   const useTitle = (title: string) => {
@@ -23,7 +32,7 @@ function ProfileOrders({ title }: { title: string }) {
   };
 
   const lastUserOrders = useSelector(
-    (state: RootState) => state.lastUserOrders.lastUserOrders
+    (state) => state.lastUserOrders.lastUserOrders
   );
 
   const reverse = (arr: LastOrderData[]) =>

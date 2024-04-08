@@ -1,44 +1,50 @@
 import { Middleware, MiddlewareAPI } from "redux";
-import { AppActions, AppDispatch, RootState } from "../store";
+import { AppDispatch, RootState } from "../store";
+import { ILastOrdersWsActions } from "../actions/last-orders";
+import { ILastUserOrdersWsActions } from "../actions/last-user-orders";
 
-export const socketMiddleware = (wsUrl: string): Middleware => {
-  return ((store: MiddlewareAPI<AppDispatch, RootState>) => {
+export type TMiddlewareActions =
+  | ILastOrdersWsActions
+  | ILastUserOrdersWsActions;
+
+export const socketMidlleware = (actions: TMiddlewareActions): Middleware => {
+  return (store: MiddlewareAPI<AppDispatch, RootState>) => {
     let socket: WebSocket | null = null;
+    return (next) => (action) => {
+      const { dispatch } = store;
+      const { wsConnecting, onOpen, onClose, onError, onMessage, onClosing } =
+        actions;
 
-    return (next) => (action: AppActions) => {
-      const { dispatch, getState } = store;
-      const { type, payload } = action;
-
-      if (type === "LAST_ORDERS_WS_CONNECTING") {
-        // объект класса WebSocket
-        socket = new WebSocket(wsUrl);
+      if (wsConnecting.match(action)) {
+        socket = new WebSocket(action.payload);
       }
+
       if (socket) {
-        // функция, которая вызывается при открытии сокета
         socket.onopen = (event) => {
-          dispatch({ type: "LAST_ORDERS_WS_OPEN" });
+          dispatch(onOpen());
         };
-
-        // функция, которая вызывается при ошибке соединения
-        socket.onerror = (event) => {
-          dispatch({ type: "LAST_ORDERS_WS_ERROR", payload: event });
+        socket.onerror = () => {
+          dispatch(onError());
         };
-
-        // функция, которая вызывается при получения события от сервера
         socket.onmessage = (event) => {
           const { data } = event;
-          dispatch({
-            type: "LAST_ORDERS_WS_MESSAGE",
-            payload: JSON.parse(data),
-          });
-        };
-        // функция, которая вызывается при закрытии соединения
-        socket.onclose = (event) => {
-          dispatch({ type: "LAST_ORDERS_WS_CLOSE", payload: event });
+          const parsedData = JSON.parse(data);
+          const { success } = parsedData;
+
+          success && dispatch(onMessage(parsedData));
         };
       }
-
+      if (socket && onClose.match(action)) {
+        socket.onclose = (event) => {
+          dispatch(onClose());
+        };
+      }
+      if (socket && onClosing.match(action)) {
+        if (socket.readyState !== WebSocket.CONNECTING) {
+          socket.close(1000);
+        }
+      }
       next(action);
     };
-  }) as Middleware;
+  };
 };

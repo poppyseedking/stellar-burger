@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../services/store";
 import { useDrag, useDrop } from "react-dnd";
 import {
   ConstructorElement,
@@ -9,7 +9,6 @@ import styles from "./burger-constructor-ingredient.module.css";
 import { deleteIngredient as deleteSelectedIngredient } from "../../services/selected-ingredients";
 
 import { IIngredient } from "../../utils/types";
-import { AppDispatch } from "../../services/store";
 
 type TConstructorIngredient = IIngredient & { index?: number };
 type TConstructorProps = {
@@ -25,7 +24,7 @@ function BurgerConstructorIngredient({
   index,
   moveCard,
 }: TConstructorProps) {
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
   const ref = useRef<HTMLDivElement>(null);
   const [handlerId, drop] = useDrop<TConstructorIngredient>({
     accept: "ingredient",

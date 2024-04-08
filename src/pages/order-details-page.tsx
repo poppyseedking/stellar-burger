@@ -1,21 +1,17 @@
-import AppHeader from "../components/app-header/app-header";
 import { useParams } from "react-router-dom";
 import { Page404 } from ".";
 import OrderDetail from "../components/order-detail/order-detail";
-import { RootState } from "../services/store";
-import { useSelector } from "react-redux";
+import { useSelector } from "../services/store";
 import { useEffect, useState } from "react";
 import { LastOrderData } from "../utils/types";
 import { useGetOrderQuery } from "../services/api";
 
 function OrderDetailsPage() {
   const lastUserOrders = useSelector(
-    (state: RootState) => state.lastUserOrders.lastUserOrders
+    (state) => state.lastUserOrders.lastUserOrders
   );
 
-  const lastOrders = useSelector(
-    (state: RootState) => state.lastOrders.lastOrders
-  );
+  const lastOrders = useSelector((state) => state.lastOrders.lastOrders);
 
   const [loading, setLoading] = useState(true);
   const [order, setOrder] = useState<LastOrderData | null>(null);
@@ -56,14 +52,11 @@ function OrderDetailsPage() {
   return (
     <>
       {order && (
-        <>
-          <AppHeader />
-          <main className="main-page w-mx-640 p-5">
-            <div className="text-center pt-10">
-              <OrderDetail />
-            </div>
-          </main>
-        </>
+        <main className="main-page w-mx-640 p-5">
+          <div className="text-center pt-10">
+            <OrderDetail />
+          </div>
+        </main>
       )}
       {!order && !loading && <Page404 />}
     </>

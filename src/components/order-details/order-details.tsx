@@ -1,18 +1,10 @@
 import styles from "./order-details.module.css";
 import imageDone from "../../images/done.png";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../services/store";
 import imageLoader from "../../images/infinity.svg";
 
-type TState = {
-  order: {
-    order: {
-      number: number;
-    };
-  };
-};
-
 const OrderDetails = () => {
-  const order = useSelector((store: TState) => store.order.order);
+  const order = useSelector((store) => store.order.order);
 
   const addZeros = function (num: number, len = 6) {
     return ("000000" + num).slice(-len);

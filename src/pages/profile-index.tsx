@@ -5,10 +5,9 @@ import {
   Input,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../services/store";
 import { useOutletContext } from "react-router-dom";
 import { userUpdate } from "../services/actions/user";
-import { AppDispatch } from "../services/store";
 import { Context } from "vm";
 
 function ProfileIndex({ title }: { title: string }) {
@@ -40,18 +39,9 @@ function ProfileIndex({ title }: { title: string }) {
     setPasswordValue(e.target.value);
   };
 
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  type RootState = {
-    user: {
-      user: {
-        name: string;
-        email: string;
-      };
-    };
-  };
-
-  const user = useSelector((store: RootState) => store.user.user);
+  const user = useSelector((store) => store.user.user);
   useEffect(() => {
     if (user) {
       setNameValue(user.name);
