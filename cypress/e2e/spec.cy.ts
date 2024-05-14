@@ -12,7 +12,7 @@ const ingredients = [
 
 describe("service is available", () => {
   it("should be available on localhost:3000", () => {
-    cy.visit("http://localhost:3000/");
+    cy.visit('/');
   });
 });
 
@@ -26,7 +26,7 @@ describe("burger constructor page", () => {
     window.localStorage.setItem("accessToken", "abc");
     window.localStorage.setItem("refreshToken", "abcd");
 
-    cy.visit("http://localhost:3000/");
+    cy.visit('/');
 
     cy.get('[data-testid="dustbin"]:nth-child(1)').as("bunTopArea");
     cy.get('[data-testid="dustbin"]:nth-child(3)').as("bunBottomArea");
