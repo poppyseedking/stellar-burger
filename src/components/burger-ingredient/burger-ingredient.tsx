@@ -7,7 +7,7 @@ import {
 import {
   add as addIngredient,
   addBun,
-} from "../../services/selected-ingredients";
+} from "../../services/reducers/selected-ingredients";
 import { v4 as uuidv4 } from "uuid";
 
 import styles from "./burger-ingredient.module.css";
@@ -53,6 +53,7 @@ function BurgerIngredient(props: TBurgerIngredient) {
       state={{ background: location }}
       className={`text-center mt-4 mb-4 ml-3 mr-3 cursor-pointer ${styles.ingredient_wrap}`}
       ref={drag}
+      data-testid={`burger-${props.ingredient.type}`}
     >
       <div
         className={`${styles.counter_wrap} ${props.count && styles.visible}`}

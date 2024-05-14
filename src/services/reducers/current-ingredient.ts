@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IIngredient } from "../utils/types";
+import { IIngredient } from "../../utils/types";
 
 const currentIngredientSlice = createSlice({
   name: "current-ingredient",

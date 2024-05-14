@@ -34,7 +34,7 @@ const Modal = (props: TModalProps) => {
 
   return ReactDOM.createPortal(
     <ModalOverlay onClose={props.onClose}>
-      <div className={styles.modal}>
+      <div className={styles.modal} data-testid='modal'>
         <header className={styles.header}>
           {!props.adjustToOrderDetail ? (
             <h3 className={`text text_type_main-large`}>{props.title}</h3>

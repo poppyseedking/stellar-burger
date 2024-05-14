@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setUser, setAuthChecked } from "../user";
+import { setUser, setAuthChecked } from "../reducers/user";
 import { api } from "../../utils/user-api";
 import { AppDispatch } from "../store";
 import { TUserAuthData, TUserUpdateData } from "../../utils/types";

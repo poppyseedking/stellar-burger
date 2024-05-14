@@ -1,12 +1,12 @@
 import { configureStore as createStore } from "@reduxjs/toolkit";
 import { ingredientsApi } from "./api";
 import { orderDetailApi } from "./api";
-import { reducer as selectedIngredientsReducer } from "./selected-ingredients";
-import { reducer as currentIngredientReducer } from "./current-ingredient";
-import { reducer as orderReducer } from "./order";
-import { lastOrdersReducer } from "./last-orders";
-import { lastUserOrdersReducer } from "./last-user-orders";
-import userReducer from "./user";
+import { reducer as selectedIngredientsReducer } from "./reducers/selected-ingredients";
+import { reducer as currentIngredientReducer } from "./reducers/current-ingredient";
+import { reducer as orderReducer } from "./reducers/order";
+import { lastOrdersReducer } from "./reducers/last-orders";
+import { lastUserOrdersReducer } from "./reducers/last-user-orders";
+import userReducer from "./reducers/user";
 
 import {
   TMiddlewareActions,

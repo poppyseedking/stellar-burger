@@ -1,28 +1,27 @@
-import { LastOrdersData, WebsocketStatus } from "../utils/types";
+import { LastOrdersData, WebsocketStatus } from "../../utils/types";
 
 import { createReducer } from "@reduxjs/toolkit";
-
 import {
-  wsConnectionSuccess,
   wsConnectionClosed,
-  wsGetOrders,
   wsConnectionError,
   wsConnectionStart,
-} from "./actions/last-user-orders";
+  wsConnectionSuccess,
+  wsGetOrders,
+} from "../actions/last-orders";
 
 type TInitialState = {
   status: WebsocketStatus;
   connectionError: "";
-  lastUserOrders: LastOrdersData | null;
+  lastOrders: LastOrdersData | null;
 };
 
 export const initialState: TInitialState = {
   status: WebsocketStatus.OFFLINE,
   connectionError: "",
-  lastUserOrders: null,
+  lastOrders: null,
 };
 
-export const lastUserOrdersReducer = createReducer(initialState, (builder) => {
+export const lastOrdersReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(wsConnectionStart, (state) => {
       state.status = WebsocketStatus.CONNECTING;
@@ -39,6 +38,6 @@ export const lastUserOrdersReducer = createReducer(initialState, (builder) => {
     })
     .addCase(wsGetOrders, (state, action) => {
       state.status = WebsocketStatus.ONLINE;
-      state.lastUserOrders = action.payload;
+      state.lastOrders = action.payload;
     });
 });

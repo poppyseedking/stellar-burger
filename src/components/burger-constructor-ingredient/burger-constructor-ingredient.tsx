@@ -6,7 +6,7 @@ import {
   DragIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from "./burger-constructor-ingredient.module.css";
-import { deleteIngredient as deleteSelectedIngredient } from "../../services/selected-ingredients";
+import { deleteIngredient as deleteSelectedIngredient } from "../../services/reducers/selected-ingredients";
 
 import { IIngredient } from "../../utils/types";
 

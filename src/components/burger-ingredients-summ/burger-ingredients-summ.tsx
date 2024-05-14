@@ -9,8 +9,8 @@ import styles from "./burger-ingredients-summ.module.css";
 import { useModal } from "../../hooks/use-modal";
 import { useSelector, useDispatch } from "../../services/store";
 import { createOrder } from "../../services/actions/order";
-import { clear as clearOrder } from "../../services/order";
-import { clear as clearSelectedIngredients } from "../../services/selected-ingredients";
+import { clear as clearOrder } from "../../services/reducers/order";
+import { clear as clearSelectedIngredients } from "../../services/reducers/selected-ingredients";
 import { Navigate } from "react-router-dom";
 
 function BurgerIngredientsSumm({ summ }: { summ: number }) {
@@ -74,6 +74,7 @@ function BurgerIngredientsSumm({ summ }: { summ: number }) {
           size="large"
           extraClass="ml-10"
           onClick={createNewOrder}
+          data-testid="createNewOrderButton"
         >
           Оформить заказ
         </Button>

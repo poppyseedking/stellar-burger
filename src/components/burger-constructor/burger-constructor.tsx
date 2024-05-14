@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useSelector, useDispatch } from "../../services/store";
 import { ConstructorElement } from "@ya.praktikum/react-developer-burger-ui-components";
-import { sort as sortIngredients } from "../../services/selected-ingredients";
+import { sort as sortIngredients } from "../../services/reducers/selected-ingredients";
 import BurgerIngredientsSumm from "../burger-ingredients-summ/burger-ingredients-summ";
 import BurgerConstructorIngredient from "../burger-constructor-ingredient/burger-constructor-ingredient";
 import BugerDropBunArea from "../burger-drop-bun-area/burger-drop-bun-area";
@@ -38,7 +38,7 @@ function BurgerConstructor() {
         <ConstructorElement
           type={position}
           isLocked={true}
-          text={`${selectedBun.name} (${positionPostscript})`}
+          text={`${selectedBun.name} ${positionPostscript}`}
           price={selectedBun.price}
           thumbnail={selectedBun.image_mobile}
         />
