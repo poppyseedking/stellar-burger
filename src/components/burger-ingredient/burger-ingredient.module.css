@@ -1,0 +1,12 @@
+.counter_wrap {
+  display: none;
+  position: relative;
+}
+
+.counter_wrap.visible {
+  display: block;
+}
+.ingredient_wrap {
+  text-decoration: none;
+  color: inherit;
+}

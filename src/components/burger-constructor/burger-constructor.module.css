@@ -1,0 +1,6 @@
+.main_section {
+  max-height: calc(100vh - var(--offset-base-size) * 22);
+  min-height: 540px;
+  display: flex;
+  flex-direction: column;
+}

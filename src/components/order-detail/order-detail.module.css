@@ -1,0 +1,56 @@
+.ingredients {
+  max-height: 300px;
+  padding-right: 8px;
+  overflow: auto;
+}
+
+.scrollable {
+  overflow: auto;
+}
+
+.scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable::-webkit-scrollbar-thumb {
+  border: 0px;
+  border-radius: 0px;
+}
+
+.ingredient {
+  display: flex;
+  align-items: center;
+}
+
+.ingredientImage {
+  width: 64px;
+  height: 64px;
+  background: #131316;
+
+  border-radius: 100px;
+  border: double 2px transparent;
+  background-image: linear-gradient(#1C1C21, #1C1C21),
+    linear-gradient(63.18deg, #801AB3 0%, #4C4CFF 100%);
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ingredientImage img {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+.price {
+  white-space: nowrap;
+}
+
+.summ {
+  display: flex;
+  align-items: center;
+}
